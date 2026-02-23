@@ -1,5 +1,13 @@
 "use strict";
 
+let num1;
+let num2;
+let operator;
+
+const operate = function (num1, operator, num2) {
+  return operator(num1, num2);
+};
+
 const add = function (a, b) {
   return a + b;
 };
@@ -28,3 +36,4 @@ const factorial = function (num) {
   }
   return result;
 };
+
