@@ -37,3 +37,14 @@ const factorial = function (num) {
   return result;
 };
 
+const display = document.querySelector(".display");
+const numberButtons = document.querySelectorAll(".number");
+
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let type = button.textContent;
+    display.textContent += type;
+    num1 = +display.textContent;
+    console.log(num1);
+  });
+});

@@ -20,7 +20,13 @@
     border-style: inset;
     border-radius: 4px;
     border-color: rgb(158, 166, 173);
-
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: rgb(57, 52, 52);
+    font-family: 'Arial Narrow', Arial, sans-serif;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 .pad {
