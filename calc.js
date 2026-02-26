@@ -3,6 +3,7 @@
 let num1;
 let num2;
 let operator = false;
+let result = false;
 
 const operate = function (num1, operator, num2) {
   return operator(num1, num2);
@@ -68,14 +69,14 @@ const addButton = document.querySelector(".add");
 
 // nest num2 creation in if?
 
+const span2 = document.createElement("span");
+
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
 
     if (operator) {
-      const span = document.createElement("span");
-      span.textContent += button.textContent;
-      display.appendChild(span);
-      num2 = +span.textContent;
+      span2.textContent += button.textContent;
+      num2 = +span2.textContent;
       console.log("num2 is " + num2);
     } else {
 
@@ -83,36 +84,70 @@ numberButtons.forEach((button) => {
       display.textContent += type;
       num1 = +display.textContent;
       console.log("num1 is " + num1);
-      addButton.addEventListener("click", () => {
-        operator = add;
-        console.log(operator);
-        const span = document.createElement("span");
-        span.textContent += addButton.textContent;
-        display.appendChild(span);
 
-      });
     }
+
   });
 });
 
-//nah 1jegyü szamokkal müködik az assignment meg a displayeles is, nice.
-// akkor most kene, hogy az egyenlösegjellel elvegezze a müveletet.
+// this just in: több szamjegynel többször irodik ki a plusz is, meg az egyenlöseg is, ha nestelem őket, de ugy legalabb resetelödik a once ha clearelem
+// ha viszont kiveszem global szintre, akkor a once az végleges... hmmm ki lehet ezt vhogy csapni a clearrel?
+
+addButton.addEventListener("click", () => {
+  if (operator == add) return undefined; // ez akkor jo, ha nem akarunk egynel több müveletet egyszerre
+  operator = add;
+  console.log(operator);
+  const span = document.createElement("span");
+  span.textContent += addButton.textContent;
+  display.appendChild(span);
+  display.appendChild(span2);
+});
 
 const equals = document.querySelector(".equal");
 
 equals.addEventListener("click", () => {
-  let result = operator(num1, num2);
+  if (result) return undefined;
+  result = operator(num1, num2);
   console.log(`equals ${result}`);
-  // ok, megcsinalja az egyenletet. akkor most irja is ki az eredemnyt
   const span = document.createElement("span");
   span.textContent = `=${result}`;
   display.appendChild(span);
 });
+
+
+
+
+
+//nah 1jegyü szamokkal müködik az assignment meg a displayeles is, nice.
+// akkor most kene, hogy az egyenlösegjellel elvegezze a müveletet.
+
+
+
+
 //ok, ki is irja az eredmenyt.
 
 //akkor most kene tudni többjegyü szamot csinalni num1-be--varj ez mar megvan lol
-//tudjon több jegyü szamot csinalni num2-be
+//tudjon több jegyü szamot csinalni num2-be MEGVAN BITCH
+//majd a pluszjelbe kene rakni "once" cuccot hogy csak egyszer irja kiiiiii - raktam puszi (bár lehet h ez később foscsi lesz, bar a clear-rel valszeg megoldhato
+
+// mit csinaljon a clear??
+//-ha megnyomom, törölje a display contenteket,
+
+const clearButton = document.querySelector(".clear");
+
+function clear() {
+  display.innerHTML = '';
+  //-es resetelje a num1,num2,operator variable-öket...
+  num1 = '';
+  num2 = '';
+  operator = false;
+  //apparently ezt is resetelni köllött
+  span2.textContent = '';
+  result = false;
+};
+
+clearButton.addEventListener("click", clear);
 
 
 
-//majd a pluszjelbe kene rakni "once" cuccot hogy csak egyszer irja kiiiiii
+
