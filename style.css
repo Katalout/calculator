@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(48, 46, 46);
+}
+
 .container {
     width: 400px;
     height: 600px;

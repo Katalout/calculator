@@ -21,8 +21,8 @@ const sum = function (array) {
   return array.reduce((sum, num) => sum + num, 0)
 };
 
-const multiply = function (array) {
-  return array.reduce((prev, current) => prev * current)
+const multiply = function (a, b) {
+  return a * b;
 };
 
 const divide = function (a, b) {
@@ -54,21 +54,6 @@ const numberButtons = document.querySelectorAll(".number");
   });
 });*/
 
-const operators = document.querySelectorAll(".operator");
-
-// make objects to store button+operator function together?
-//or just do them one by one, its only 4....
-
-//when i push button, let operator be that function
-
-const addButton = document.querySelector(".add");
-
-
-// how to get num2? nest the three handlers?
-//apparently not
-
-// nest num2 creation in if?
-
 const span2 = document.createElement("span");
 
 numberButtons.forEach((button) => {
@@ -93,16 +78,6 @@ numberButtons.forEach((button) => {
 // this just in: több szamjegynel többször irodik ki a plusz is, meg az egyenlöseg is, ha nestelem őket, de ugy legalabb resetelödik a once ha clearelem
 // ha viszont kiveszem global szintre, akkor a once az végleges... hmmm ki lehet ezt vhogy csapni a clearrel?
 
-addButton.addEventListener("click", () => {
-  if (operator == add) return undefined; // ez akkor jo, ha nem akarunk egynel több müveletet egyszerre
-  operator = add;
-  console.log(operator);
-  const span = document.createElement("span");
-  span.textContent += addButton.textContent;
-  display.appendChild(span);
-  display.appendChild(span2);
-});
-
 const equals = document.querySelector(".equal");
 
 equals.addEventListener("click", () => {
@@ -114,40 +89,73 @@ equals.addEventListener("click", () => {
   display.appendChild(span);
 });
 
-
-
-
-
-//nah 1jegyü szamokkal müködik az assignment meg a displayeles is, nice.
-// akkor most kene, hogy az egyenlösegjellel elvegezze a müveletet.
-
-
-
-
-//ok, ki is irja az eredmenyt.
-
-//akkor most kene tudni többjegyü szamot csinalni num1-be--varj ez mar megvan lol
-//tudjon több jegyü szamot csinalni num2-be MEGVAN BITCH
 //majd a pluszjelbe kene rakni "once" cuccot hogy csak egyszer irja kiiiiii - raktam puszi (bár lehet h ez később foscsi lesz, bar a clear-rel valszeg megoldhato
-
-// mit csinaljon a clear??
-//-ha megnyomom, törölje a display contenteket,
 
 const clearButton = document.querySelector(".clear");
 
 function clear() {
   display.innerHTML = '';
-  //-es resetelje a num1,num2,operator variable-öket...
   num1 = '';
   num2 = '';
   operator = false;
-  //apparently ezt is resetelni köllött
   span2.textContent = '';
   result = false;
 };
 
 clearButton.addEventListener("click", clear);
 
+// make objects to store button+operator function together?
+//or just do them one by one, its only 4....
+
+//müködjön a többi operator is, ne csak az add.
+
+const addButton = document.querySelector(".add");
+const subtractButton = document.querySelector(".subtract");
+const multiplyButton = document.querySelector(".multiply");
+const divideButton = document.querySelector(".divide");
+
+const operatorButtons = [addButton, subtractButton, multiplyButton, divideButton]; //array of 4 operator button references
+const operatorFunctions = [add, subtract, multiply, divide]; //array of 4 operator functions
+
+//create array of objects??
+let addObject = {
+  "function": add,
+  "button": addButton
+}
 
 
+
+let zip = (a1, a2) => a1.map((x, i) => [x, a2[i]]);
+let zip2 = (a1, a2) => a1.map((x, i) => {
+  let obj = {};
+  obj["button"] = x;
+  obj["function"] = a2[i];
+  return obj;
+});
+let arrayOfObjects = zip2(operatorButtons, operatorFunctions);
+
+
+// create function to assign operator=operatorfunction upon clicking an operatorbutton.
+
+/*addButton.addEventListener("click", () => {
+  if (operator == add) return undefined; // ez akkor jo, ha nem akarunk egynel több müveletet egyszerre
+  operator = add;
+  console.log(operator);
+  const span = document.createElement("span");
+  span.textContent += addButton.textContent;
+  display.appendChild(span);
+  display.appendChild(span2);
+});*/
+
+arrayOfObjects.forEach(obj => {
+  obj.button.addEventListener("click", () => {
+    console.log(obj.function);
+    operator = obj.function;
+    const span = document.createElement("span");
+    span.textContent += obj.button.textContent;
+    display.appendChild(span);
+    display.appendChild(span2);
+  }
+  )
+});
 
