@@ -84,6 +84,8 @@ const equals = document.querySelector(".equal");
 equals.addEventListener("click", () => {
   if (result) return undefined;
   result = operator(num1, num2);
+  console.log(result);
+  result = Math.round(result * 1000) / 1000;
   console.log(`equals ${result}`);
   const span = document.createElement("span");
   span.textContent = `=${result}`;
@@ -124,7 +126,7 @@ let zip2 = (a1, a2) => a1.map((x, i) => {
   obj["function"] = a2[i];
   return obj;
 });
-let arrayOfObjects = zip2(operatorButtons, operatorFunctions);
+let operators = zip2(operatorButtons, operatorFunctions);
 
 
 // create function to assign operator=operatorfunction upon clicking an operatorbutton.
@@ -141,9 +143,24 @@ let arrayOfObjects = zip2(operatorButtons, operatorFunctions);
 
 const spanOperator = document.createElement("span");
 
-arrayOfObjects.forEach(obj => {
+operators.forEach(obj => {
   obj.button.addEventListener("click", () => {
     if (!num1) return undefined;
+    if (num2) {
+      let részResult = operator(num1, num2);
+      let roundedResult = Math.round(részResult * 1000) / 1000;
+      console.log(`részResult ${részResult}`);
+      display.innerHTML = '';
+      operator = obj.function;
+      if (részResult === roundedResult) display.textContent = részResult + obj.button.textContent;
+      else display.textContent = `~${roundedResult}${obj.button.textContent}`;
+      num1 = részResult;
+      num2 = false;
+      spanNum2.textContent = '';
+      display.appendChild(spanNum2);
+      console.log("num2 is " + num2);
+      return undefined;
+    };
     console.log(obj.function);
     operator = obj.function;
     spanOperator.textContent = obj.button.textContent;
@@ -152,3 +169,8 @@ arrayOfObjects.forEach(obj => {
   )
 });
 
+//round result to 3 digits DONE
+
+//Enter a second operator (-). At this point, it should evaluate the initial pair of numbers (12 + 7), then display the result (19).
+
+//szoval ha nem equalt nyomok masodiknak hmmmmmmm
