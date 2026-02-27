@@ -29,6 +29,7 @@ const multiply = function (a, b) {
 };
 
 const divide = function (a, b) {
+  if (b === 0) return "math says no";
   return a / b;
 }
 
@@ -82,13 +83,20 @@ numberButtons.forEach((button) => {
 
 const equals = document.querySelector(".equal");
 equals.addEventListener("click", () => {
-  if (result) return undefined;
+  if (result || !num2 || !num1) return undefined;
   result = operator(num1, num2);
   console.log(result);
+  if (result === "math says no") {
+    clear();
+    //display.innerHTML = '';
+    display.textContent = "math says no.";
+    return undefined;
+  };
   result = Math.round(result * 1000) / 1000;
   console.log(`equals ${result}`);
   const span = document.createElement("span");
   span.textContent = `=${result}`;
+  span.setAttribute("id", "theResult");
   display.appendChild(span);
 });
 
@@ -147,6 +155,7 @@ operators.forEach(obj => {
   obj.button.addEventListener("click", () => {
     if (!num1) return undefined;
     if (num2) {
+      result = false;
       let részResult = operator(num1, num2);
       let roundedResult = Math.round(részResult * 1000) / 1000;
       console.log(`részResult ${részResult}`);
@@ -171,6 +180,10 @@ operators.forEach(obj => {
 
 //round result to 3 digits DONE
 
-//Enter a second operator (-). At this point, it should evaluate the initial pair of numbers (12 + 7), then display the result (19).
+//Enter a second operator (-). At this point, it should evaluate the initial pair of numbers (12 + 7), then display the result (19). DONE
 
-//szoval ha nem equalt nyomok masodiknak hmmmmmmm
+//Display a snarky error message if the user tries to divide by 0… and don’t let it crash your calculator! dONE
+
+// egyenlőség után lehessen folytatni, a resultot resetelni i guesss DONE
+
+//Pressing = before entering all of the numbers or an operator could cause problems! (looks like if num2 is missing, we get a =NAN) DONE
