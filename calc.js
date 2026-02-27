@@ -61,13 +61,12 @@ const factorial = function (num) {
 
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
-
+    if (result) clear();
     if (operator) {
       spanNum2.textContent += button.textContent;
       num2 = +spanNum2.textContent;
       console.log("num2 is " + num2);
     } else {
-
       let type = button.textContent;
       display.textContent += type;
       num1 = +display.textContent;
@@ -161,8 +160,10 @@ operators.forEach(obj => {
       console.log(`részResult ${részResult}`);
       display.innerHTML = '';
       operator = obj.function;
-      if (részResult === roundedResult) display.textContent = részResult + obj.button.textContent;
-      else display.textContent = `~${roundedResult}${obj.button.textContent}`;
+      if (részResult === roundedResult) display.textContent = részResult;
+      else display.textContent = `~${roundedResult}`;
+      spanOperator.textContent = obj.button.textContent;
+      display.appendChild(spanOperator);
       num1 = részResult;
       num2 = false;
       spanNum2.textContent = '';
@@ -187,3 +188,7 @@ operators.forEach(obj => {
 // egyenlőség után lehessen folytatni, a resultot resetelni i guesss DONE
 
 //Pressing = before entering all of the numbers or an operator could cause problems! (looks like if num2 is missing, we get a =NAN) DONE
+
+//what happens when i push a number after result displayed? - appends it to num2 hmmmmmmmm
+
+//DONE BITCH
