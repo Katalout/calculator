@@ -57,20 +57,27 @@ const factorial = function (num) {
   });
 });*/
 
-
+function isDecimal(num) {
+  console.log(num);
+  if ((num === undefined) || !num) return undefined;
+  return (num).includes('.');
+};
 
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (result) clear();
     if (operator) {
+      if (((isDecimal(num2)) || (!num2)) && (button.textContent == ".")) return undefined;
+      //ooohhh i think i did it with num2, now with num1 too plsss
       spanNum2.textContent += button.textContent;
-      num2 = +spanNum2.textContent;
-      console.log("num2 is " + num2);
+      num2 = spanNum2.textContent;
+      console.log("num2 is " + +num2);
     } else {
+      if (((isDecimal(num1)) || (!num1)) && (button.textContent == ".")) return undefined;
       let type = button.textContent;
       display.textContent += type;
-      num1 = +display.textContent;
-      console.log("num1 is " + num1);
+      num1 = display.textContent;
+      console.log("num1 is " + +num1);
       display.appendChild(spanOperator);
     }
 
@@ -83,7 +90,7 @@ numberButtons.forEach((button) => {
 const equals = document.querySelector(".equal");
 equals.addEventListener("click", () => {
   if (result || !num2 || !num1) return undefined;
-  result = operator(num1, num2);
+  result = operator(+num1, +num2);
   console.log(result);
   if (result === "math says no") {
     clear();
@@ -155,7 +162,7 @@ operators.forEach(obj => {
     if (!num1) return undefined;
     if (num2) {
       result = false;
-      let részResult = operator(num1, num2);
+      let részResult = operator(+num1, +num2);
       let roundedResult = Math.round(részResult * 1000) / 1000;
       console.log(`részResult ${részResult}`);
       display.innerHTML = '';
@@ -168,7 +175,7 @@ operators.forEach(obj => {
       num2 = false;
       spanNum2.textContent = '';
       display.appendChild(spanNum2);
-      console.log("num2 is " + num2);
+      console.log("num2 is " + +num2);
       return undefined;
     };
     console.log(obj.function);
@@ -179,16 +186,4 @@ operators.forEach(obj => {
   )
 });
 
-//round result to 3 digits DONE
-
-//Enter a second operator (-). At this point, it should evaluate the initial pair of numbers (12 + 7), then display the result (19). DONE
-
-//Display a snarky error message if the user tries to divide by 0… and don’t let it crash your calculator! dONE
-
-// egyenlőség után lehessen folytatni, a resultot resetelni i guesss DONE
-
-//Pressing = before entering all of the numbers or an operator could cause problems! (looks like if num2 is missing, we get a =NAN) DONE
-
-//what happens when i push a number after result displayed? - appends it to num2 hmmmmmmmm
-
-//DONE BITCH
+//Make sure you don’t let them type more than one though, like: 12.3.56.5. Disable the . button if there’s already a decimal separator in the display. DONE bitch
