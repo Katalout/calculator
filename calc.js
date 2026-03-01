@@ -1,7 +1,7 @@
 "use strict";
 
-let num1;
-let num2;
+let num1 = false;
+let num2 = false;
 let operator = false;
 let result = false;
 const spanNum2 = document.createElement("span");
@@ -63,7 +63,7 @@ function isDecimal(num) {
   return (num).includes('.');
 };
 
-numberButtons.forEach((button) => {
+/*numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (result) clear();
     if (operator) {
@@ -82,7 +82,7 @@ numberButtons.forEach((button) => {
     }
 
   });
-});
+});*/
 
 // this just in: több szamjegynel többször irodik ki a plusz is, meg az egyenlöseg is, ha nestelem őket, de ugy legalabb resetelödik a once ha clearelem
 // ha viszont kiveszem global szintre, akkor a once az végleges... hmmm ki lehet ezt vhogy csapni a clearrel?
@@ -186,4 +186,38 @@ operators.forEach(obj => {
   )
 });
 
-//Make sure you don’t let them type more than one though, like: 12.3.56.5. Disable the . button if there’s already a decimal separator in the display. DONE bitch
+let latestNode;
+
+numberButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (result) clear();
+    if (operator) {
+      if (((isDecimal(num2)) || (!num2)) && (button.textContent == ".")) return undefined;
+      spanNum2.textContent += button.textContent;
+      num2 = spanNum2.textContent;
+      console.log("num2 is " + +num2);
+      latestNode = spanNum2;
+    } else {
+      if (((isDecimal(num1)) || (!num1)) && (button.textContent == ".")) return undefined;
+      let type = button.textContent;
+      display.textContent += type;
+      num1 = display.textContent;
+      latestNode = display;
+      console.log("num1 is " + +num1);
+      display.appendChild(spanOperator);
+    }
+
+  });
+});
+
+function backspace() {
+  if (((operator) && (!num2)) || result) return undefined;
+  console.log(latestNode.textContent);
+  let ujlast = latestNode.textContent.slice(0, latestNode.textContent.length - 1);
+  console.log(`ujlast: ${ujlast}`);
+  latestNode == display ? num1 = ujlast : num2 = ujlast;
+  latestNode.textContent = ujlast;
+  console.log(`num1: ${num1}, num2: ${num2}`);
+}
+//csinalj backspace buttont sighhhhh
+//anna talalt nullas hibajat is majd javitsdsdsds ki
