@@ -96,6 +96,7 @@ equals.addEventListener("click", () => {
     clear();
     //display.innerHTML = '';
     display.textContent = "math says no.";
+    result = true;
     return undefined;
   };
   result = Math.round(result * 1000) / 1000;
@@ -142,19 +143,6 @@ let zip2 = (a1, a2) => a1.map((x, i) => {
 });
 let operators = zip2(operatorButtons, operatorFunctions);
 
-
-// create function to assign operator=operatorfunction upon clicking an operatorbutton.
-
-/*addButton.addEventListener("click", () => {
-  if (operator == add) return undefined; // ez akkor jo, ha nem akarunk egynel több müveletet egyszerre
-  operator = add;
-  console.log(operator);
-  const span = document.createElement("span");
-  span.textContent += addButton.textContent;
-  display.appendChild(span);
-  display.appendChild(spanNum2);
-});*/
-
 const spanOperator = document.createElement("span");
 
 operators.forEach(obj => {
@@ -171,7 +159,7 @@ operators.forEach(obj => {
       else display.textContent = `~${roundedResult}`;
       spanOperator.textContent = obj.button.textContent;
       display.appendChild(spanOperator);
-      num1 = részResult;
+      num1 = részResult.toString();
       num2 = false;
       spanNum2.textContent = '';
       display.appendChild(spanNum2);
@@ -220,4 +208,6 @@ function backspace() {
   console.log(`num1: ${num1}, num2: ${num2}`);
 }
 //csinalj backspace buttont sighhhhh
-//anna talalt nullas hibajat is majd javitsdsdsds ki
+
+
+//anna talalt nullas hibajat is majd javitsdsdsds ki DONE
