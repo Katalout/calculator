@@ -64,13 +64,15 @@ body {
 }
 
 .symbols {
-    min-width: 25%;
+    flex: 1;
     flex-direction: column;
     align-items: stretch;
 
 }
 
-.numbers {}
+.numbers {
+    flex: 3;
+}
 
 .button {
     flex: 1 0 auto;
@@ -90,8 +92,8 @@ body {
     border-color: rgb(225, 203, 203);
 }
 
-.equal {
-    flex: 2.75;
+.bottom .button {
+    flex: 1;
 }
 
 /*#theResult {
