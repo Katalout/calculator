@@ -46,46 +46,18 @@ const factorial = function (num) {
   return result;
 };
 
-
-
-/*numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    let type = button.textContent;
-    display.textContent += type;
-    num1 = +display.textContent;
-    console.log(num1);
-  });
-});*/
-
 function isDecimal(num) {
   console.log(num);
   if ((num === undefined) || !num) return undefined;
   return (num).includes('.');
 };
 
-/*numberButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (result) clear();
-    if (operator) {
-      if (((isDecimal(num2)) || (!num2)) && (button.textContent == ".")) return undefined;
-      //ooohhh i think i did it with num2, now with num1 too plsss
-      spanNum2.textContent += button.textContent;
-      num2 = spanNum2.textContent;
-      console.log("num2 is " + +num2);
-    } else {
-      if (((isDecimal(num1)) || (!num1)) && (button.textContent == ".")) return undefined;
-      let type = button.textContent;
-      display.textContent += type;
-      num1 = display.textContent;
-      console.log("num1 is " + +num1);
-      display.appendChild(spanOperator);
-    }
+function getDisplayContents() {
+  let displayContentsNL = display.childNodes;
+  let displayContentsArr = Array.from(displayContentsNL);
+  return displayContentsArr;
+}
 
-  });
-});*/
-
-// this just in: több szamjegynel többször irodik ki a plusz is, meg az egyenlöseg is, ha nestelem őket, de ugy legalabb resetelödik a once ha clearelem
-// ha viszont kiveszem global szintre, akkor a once az végleges... hmmm ki lehet ezt vhogy csapni a clearrel?
 
 const equals = document.querySelector(".equal");
 equals.addEventListener("click", () => {
@@ -169,6 +141,7 @@ operators.forEach(obj => {
     console.log(obj.function);
     operator = obj.function;
     spanOperator.textContent = obj.button.textContent;
+    if (!(getDisplayContents().includes(spanOperator))) display.appendChild(spanOperator);
     display.appendChild(spanNum2);
   }
   )
@@ -198,7 +171,7 @@ numberButtons.forEach((button) => {
   });
 });
 
-function backspace() {
+function undo() {
   if (((operator) && (!num2)) || result) return undefined;
   console.log(latestNode.textContent);
   let ujlast = latestNode.textContent.slice(0, latestNode.textContent.length - 1);
@@ -207,7 +180,14 @@ function backspace() {
   latestNode.textContent = ujlast;
   console.log(`num1: ${num1}, num2: ${num2}`);
 }
-//csinalj backspace buttont sighhhhh
+//kösd össze a backspace buttont a funkcioval
+
+const undoButton = document.querySelector(".undo");
+undoButton.addEventListener("click", undo);
+
+//nezzen ki jol telefonon is
+
+//valtozzon meg a kurzor gomb fölött
 
 
-//anna talalt nullas hibajat is majd javitsdsdsds ki DONE
+
