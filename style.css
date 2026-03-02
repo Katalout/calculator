@@ -88,9 +88,21 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 5px;
-    border-style: groove;
     border-color: rgb(225, 203, 203);
+    cursor: pointer;
 }
+
+.button:hover {
+    background-color: rgba(205, 184, 184, 0.708);
+}
+
+/*.button:active {
+  box-shadow:
+    inset -2px -2px 3px rgb(255 255 255 / 0.6),
+    inset 2px 2px 3px rgb(0 0 0 / 0.6);
+}*/
+/*border-style: inset;*/
+
 
 .bottom .button {
     flex: 1;

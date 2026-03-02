@@ -180,14 +180,22 @@ function undo() {
   latestNode.textContent = ujlast;
   console.log(`num1: ${num1}, num2: ${num2}`);
 }
-//kösd össze a backspace buttont a funkcioval
 
 const undoButton = document.querySelector(".undo");
 undoButton.addEventListener("click", undo);
 
-//nezzen ki jol telefonon is
+/*const allButtons = document.querySelectorAll(".button");
+allButtons.forEach((button) => {
+button.addEventListener("mouseover",()=>{
 
-//valtozzon meg a kurzor gomb fölött
+})
+})*/
+
+//nezzen ki jol telefonon is -meh
+
+//valtozzon meg a kurzor gomb fölött done
+//ne csurogjon ki a hosszu szöveg
+// add keyboard support! damn.
 
 
 
