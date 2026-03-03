@@ -74,7 +74,7 @@ equals.addEventListener("click", () => {
   result = Math.round(result * 1000) / 1000;
   console.log(`equals ${result}`);
   const span = document.createElement("span");
-  span.textContent = `=${result}`;
+  span.textContent = `= ${result}`;
   span.setAttribute("id", "theResult");
   display.appendChild(span);
 });
@@ -192,9 +192,10 @@ button.addEventListener("mouseover",()=>{
 })*/
 
 //nezzen ki jol telefonon is -meh
-
 //valtozzon meg a kurzor gomb fölött done
-//ne csurogjon ki a hosszu szöveg
+
+//ne csurogjon ki a hosszu szöveg hmhmhmh
+
 // add keyboard support! damn.
 
 
