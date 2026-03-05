@@ -33,23 +33,16 @@ body {
     border-color: rgb(158, 166, 173);
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    justify-content: safe end;
     align-items: center;
-    align-content: center;
+    align-content: safe center;
     gap: 0px 5px;
-    /*what do i want?
-ha elfer az egesz egy sorban, akkor legyen közepen.
-ha uj szamot kell uj sorba tenni, akkor bövüljön ennek megfelelöen
-ohhh azt is lehet hogy scrollolhato boxxa valik ha overflow van hmmm
-vaaagy egyenlösegjel nyomasanal az egyenlet menjen föl, legyen kisebb, es az eredmeny displayeljen külön, normal meretben hmmmmmm
-
-az egyenlösegjelet külön spanba rakhatnam h lehessen gap a utana
-*/
     color: rgb(57, 52, 52);
     font-family: 'Arial Narrow', Arial, sans-serif;
     font-size: 2.5em;
     font-weight: bold;
     overflow: auto;
+    text-wrap: nowrap;
     /*word-break: break-all;
     overflow-wrap: anywhere;
     text-align: end;*/
