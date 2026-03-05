@@ -93,11 +93,6 @@ function clear() {
 };
 clearButton.addEventListener("click", clear);
 
-// make objects to store button+operator function together?
-//or just do them one by one, its only 4....
-
-//müködjön a többi operator is, ne csak az add.
-
 const addButton = document.querySelector(".add");
 const subtractButton = document.querySelector(".subtract");
 const multiplyButton = document.querySelector(".multiply");
@@ -116,6 +111,7 @@ let zip2 = (a1, a2) => a1.map((x, i) => {
 let operators = zip2(operatorButtons, operatorFunctions);
 
 const spanOperator = document.createElement("span");
+
 
 operators.forEach(obj => {
   obj.button.addEventListener("click", () => {
@@ -184,19 +180,24 @@ function undo() {
 const undoButton = document.querySelector(".undo");
 undoButton.addEventListener("click", undo);
 
-/*const allButtons = document.querySelectorAll(".button");
-allButtons.forEach((button) => {
-button.addEventListener("mouseover",()=>{
-
-})
-})*/
-
 //nezzen ki jol telefonon is -meh
-//valtozzon meg a kurzor gomb fölött done
 
-//ne csurogjon ki a hosszu szöveg hmhmhmh
+// add keyboard support! damn. add keyboard support to operators: maybe just to "add" at first.
 
-// add keyboard support! damn.
+const html = document.querySelector("html");
 
+html.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  if (event.key === "+") {
+    console.log("add");
+    //triggerelje a plusz lenyomasat dik
+    addButton.dispatchEvent(new Event('click'));
+  }
+});
 
+let zip3 = (arrayofobjects, array2) => arrayofobjects.map((obj, i) => {
+  obj["key"] = array2[i];
+  return obj;
+});
 
+operators = zip3(operators, ["+", "-", "x", "/",]);
