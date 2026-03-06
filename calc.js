@@ -240,12 +240,9 @@ buttons[15].key = ['.', ','];
 
 buttons.forEach((button) => button.button.addEventListener("click", () => button.button.blur()));
 
-
 //OKAYYY bitchesss keyboard support is ON
 // maybe add multiple options for clear, enter and comma? DONE
 // now last things:
-// -make code prettier
-// -maybe bring all buttons and functions into one array??
-// -then the listeners can be just one function, maybe.
+// -make code prettier--maybe bring all buttons and functions into one array??
+// -then the listeners can be just one function, maybe. but i'm not about to do that just now :D
 // -README.. gah.
-// -
