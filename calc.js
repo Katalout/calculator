@@ -219,7 +219,7 @@ let zip3 = (arrayofobjects, array2) => arrayofobjects.map((obj, i) => {
 operators = zip3(operators, ["+", "-", "x", "/",]);
 
 function findKey(array, keyy) {
-  return array.find((object) => object.key == keyy)
+  return array.find((object) => object.key.includes(keyy));
 };
 //nah operatorokra van keyboard support de ez a default buttonnfocus ize zavarooooo, de nembiztos h nekem ezzel foglalkoznom kell
 
@@ -233,14 +233,16 @@ buttons = buttons.map((button) => {
   return obj;
 });
 buttons[16].key = "Backspace";
-buttons[17].key = "Enter";
-buttons[9].key = "c";
+buttons[17].key = ["Enter", "="];
+buttons[9].key = ["c", "Escape"];
+buttons[0].key = ['1', 'i'];
+buttons[15].key = ['.', ','];
 
 buttons.forEach((button) => button.button.addEventListener("click", () => button.button.blur()));
 
 
 //OKAYYY bitchesss keyboard support is ON
-// maybe add multiple options for clear, enter and comma?
+// maybe add multiple options for clear, enter and comma? DONE
 // now last things:
 // -make code prettier
 // -maybe bring all buttons and functions into one array??
