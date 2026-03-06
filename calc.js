@@ -187,13 +187,27 @@ undoButton.addEventListener("click", undo);
 const html = document.querySelector("html");
 
 html.addEventListener("keydown", (event) => {
-  console.log(event.key);
-  if (event.key === "+") {
-    console.log("add");
-    //triggerelje a plusz lenyomasat dik
-    addButton.dispatchEvent(new Event('click'));
+  let keydown = event.key;
+  console.log(keydown);
+  //a keydown-t keresse az operatorsban, ha megtalalja akk tovabb
+  let check = findKey(buttons, keydown);
+  console.log(`check:${check}`);
+  if (check) {
+    console.log(`check.key:${check.key}`);
+    console.log(`corresponding button:${check.button}`);
+    check.button.dispatchEvent(new Event('click'));
+    // display.focus();  de lehet ezt egyel kijjebb kellene rakni
   }
 });
+
+
+
+/* if (keydown === "+") {
+   console.log("add");
+   //triggerelje a plusz lenyomasat dik
+   addButton.dispatchEvent(new Event('click'));
+ }
+});*/
 
 let zip3 = (arrayofobjects, array2) => arrayofobjects.map((obj, i) => {
   obj["key"] = array2[i];
@@ -201,3 +215,31 @@ let zip3 = (arrayofobjects, array2) => arrayofobjects.map((obj, i) => {
 });
 
 operators = zip3(operators, ["+", "-", "x", "/",]);
+
+function findKey(array, keyy) {
+  return array.find((object) => object.key == keyy)
+};
+//nah operatorokra van keyboard support de ez a default buttonnfocus ize zavarooooo, de nembiztos h nekem ezzel foglalkoznom kell
+
+//csinalni arrayt az összes buttonbol i guess?
+const buttonsNL = document.querySelectorAll("button");
+let buttons = Array.from(buttonsNL);
+buttons = buttons.map((button) => {
+  let obj = {};
+  obj["key"] = button.textContent;
+  obj["button"] = button;
+  return obj;
+});
+buttons[16].key = "Backspace";
+buttons[17].key = "Enter";
+buttons[9].key = "c";
+
+
+//OKAYYY bitchesss keyboard support is ON
+// maybe add multiple options for clear, enter and comma?
+// now last things:
+// -make code prettier
+// -maybe bring all buttons and functions into one array??
+// -then the listeners can be just one function, maybe.
+// -README.. gah.
+// -
