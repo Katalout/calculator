@@ -123,6 +123,10 @@ body {
     flex: 1;
 }
 
+.undo {
+    font-size: 40px;
+}
+
 /*#theResult {
     font-size: 46px;
     font-weight: bold;
