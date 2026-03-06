@@ -97,7 +97,7 @@ body {
     font-weight: bold;
     text-shadow: 2px 0px 0px rgb(143, 139, 139);
     color: rgb(101, 86, 86);
-    font-family: monospace;
+    font-family: Courier, 'Courier New', monospace;
     background-color: rgba(205, 184, 184, 0.832);
     display: flex;
     justify-content: center;
@@ -123,9 +123,9 @@ body {
     flex: 1;
 }
 
-.undo {
+/*.undo {
     font-size: 40px;
-}
+}*/
 
 /*#theResult {
     font-size: 46px;
