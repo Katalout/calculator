@@ -71,10 +71,11 @@ equals.addEventListener("click", () => {
     result = true;
     return undefined;
   };
-  result = Math.round(result * 1000) / 1000;
   console.log(`equals ${result}`);
   const span = document.createElement("span");
-  span.textContent = `= ${result}`;
+  let roundedResult = Math.round(result * 1000) / 1000;
+  if (result === roundedResult) span.textContent = `= ${result}`;
+  else span.textContent = `= ~${roundedResult}`;
   span.setAttribute("id", "theResult");
   display.appendChild(span);
 });
@@ -163,7 +164,7 @@ numberButtons.forEach((button) => {
       console.log("num1 is " + +num1);
       display.appendChild(spanOperator);
     }
-
+    //button.blur();
   });
 });
 
@@ -189,6 +190,7 @@ const html = document.querySelector("html");
 html.addEventListener("keydown", (event) => {
   let keydown = event.key;
   console.log(keydown);
+  console.log(event);
   //a keydown-t keresse az operatorsban, ha megtalalja akk tovabb
   let check = findKey(buttons, keydown);
   console.log(`check:${check}`);
@@ -233,6 +235,8 @@ buttons = buttons.map((button) => {
 buttons[16].key = "Backspace";
 buttons[17].key = "Enter";
 buttons[9].key = "c";
+
+buttons.forEach((button) => button.button.addEventListener("click", () => button.button.blur()));
 
 
 //OKAYYY bitchesss keyboard support is ON
